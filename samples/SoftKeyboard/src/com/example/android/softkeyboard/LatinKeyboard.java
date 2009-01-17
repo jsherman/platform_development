@@ -50,7 +50,7 @@ public class LatinKeyboard extends Keyboard {
          */
         @Override
         public boolean isInside(int x, int y) {
-            return super.isInside(x, codes[0] == KEYCODE_CANCEL ? y - 10 : y);
+            return super.isInside(x, codes[0] == KEYCODE_CANCEL ? y - 5 : y);
         }
     }
 

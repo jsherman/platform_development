@@ -19,5 +19,6 @@
 -->
 
 <resources>
-    <dimen name="key_height">46px</dimen>
+    <dimen name="key_height">30px</dimen>
+    <dimen name="candidate_font_height">16sp</dimen>
 </resources>

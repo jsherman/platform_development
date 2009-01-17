@@ -173,7 +173,7 @@ public class SoftKeyboard extends InputMethodService
                 // be doing predictive text (showing candidates as the
                 // user types).
                 mCurKeyboard = mQwertyKeyboard;
-                mPredictionOn = true;
+                //mPredictionOn = true;
                 
                 // We now look for a few special variations of text that will
                 // modify our behavior.
@@ -406,11 +406,11 @@ public class SoftKeyboard extends InputMethodService
      * editor state.
      */
     private void updateShiftKeyState(EditorInfo attr) {
-        if (attr != null 
+      /*  if (attr != null 
                 && mInputView != null && mQwertyKeyboard == mInputView.getKeyboard()) {
             int caps = getCurrentInputConnection().getCursorCapsMode(attr.inputType);
             mInputView.setShifted(mCapsLock || caps != 0);
-        }
+        }*/
     }
     
     /**
@@ -494,7 +494,7 @@ public class SoftKeyboard extends InputMethodService
      * candidates.
      */
     private void updateCandidates() {
-        if (!mCompletionOn) {
+        if (!mCompletionOn && mCandidateView != null) {
             if (mComposing.length() > 0) {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add(mComposing.toString());
@@ -555,6 +555,7 @@ public class SoftKeyboard extends InputMethodService
     }
     
     private void handleCharacter(int primaryCode, int[] keyCodes) {
+        /*
         if (isInputViewShown()) {
             if (mInputView.isShifted()) {
                 primaryCode = Character.toUpperCase(primaryCode);
@@ -569,6 +570,14 @@ public class SoftKeyboard extends InputMethodService
             getCurrentInputConnection().commitText(
                     String.valueOf((char) primaryCode), 1);
         }
+        */
+        if (mInputView.isShifted()) {
+            primaryCode = Character.toUpperCase(primaryCode);
+            if (isAlphabet(primaryCode)) {
+                mInputView.setShifted(false);
+            }
+        }
+        sendKey(primaryCode);
     }
 
     private void handleClose() {
